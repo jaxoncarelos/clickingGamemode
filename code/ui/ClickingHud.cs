@@ -9,5 +9,6 @@ public partial class ClickingHud : HudEntity<RootPanel>
          
         RootPanel.AddChild<ChatBox>();
         RootPanel.AddChild<CashCounter>();
+        RootPanel.AddChild<shopMenu>();
     }
 }

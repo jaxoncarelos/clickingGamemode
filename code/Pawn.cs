@@ -32,14 +32,7 @@ partial class Pawn : Player
 		EnableShadowInFirstPerson = true;
 		CameraMode = new FirstPersonCamera();
 	}
-	public override void ClientSpawn()
-	{
-		base.ClientSpawn();
 
-		var worldPanel = new upgradeMoney();
-		var worldPanelLocation = new Vector3(-514 ,33, 4);
-		worldPanel.Position = worldPanelLocation;
-	}
 
 	/// <summary>
 	/// Called every tick, clientside and serverside.

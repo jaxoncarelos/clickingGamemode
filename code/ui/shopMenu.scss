@@ -1,0 +1,17 @@
+panel
+{
+    opacity: 0;
+    pointer-events: none;
+    pointer-events: all;
+    position: absolute;
+    background-color: red;
+    width: 300px;
+    height: 300px;
+    left: 600px;
+    top: 400px;
+}
+
+.shopMenuOpen panel
+{
+    opacity: 1;
+}
