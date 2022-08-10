@@ -1,17 +1,32 @@
 panel
 {
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     pointer-events: none;
-    pointer-events: all;
     position: absolute;
     background-color: red;
-    width: 300px;
-    height: 300px;
-    left: 600px;
-    top: 400px;
+    width: 500px;
+    height: 500px;
+    top: 30%;
+    left: 700px;
+
+
+    border-radius: 10px;
+    background-color: #222 0.2;
+    
+
+
+    .upgrade{
+        background-color: red;
+        width: 100px;
+        height: 100px;
+    }
 }
 
 .shopMenuOpen panel
 {
     opacity: 1;
+    transition: all 0.2s ease-out ;
+    pointer-events: all;
 }
