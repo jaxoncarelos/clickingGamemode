@@ -27,7 +27,7 @@ public class shopMenu : Panel
         var ply = Local.Pawn as Pawn;
         if(ply == null) return;
 
-        costUpgrade.Text = $"Cost: ${Math.Floor(100 * Math.Sqrt(ply.moneyPerClick))}";
+        costUpgrade.Text = $"Cost: ${ 55 * (ply.moneyPerClick * ply.moneyPerClick)}";
         currentAmount.Text = $"Current: ${ply.moneyPerClick}";
         Parent.SetClass("shopMenuOpen", Input.Down(InputButton.Flashlight));
 	}

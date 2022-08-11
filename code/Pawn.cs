@@ -13,6 +13,7 @@ partial class Pawn : Player
 	/// </summary>
 	[Net]
 	public long currentMoney { get; set; } = 0;
+	[Net]
 	public int moneyPerClick { get; set; } = 1;
 	public override void Spawn()
 	{

@@ -57,7 +57,7 @@ public partial class MyGame : Sandbox.Game
 		if(ply.currentMoney >= Math.Floor(100 * Math.Sqrt(ply.moneyPerClick)))
 		{
 			Log.Info("Inside");
-			ply.currentMoney -= Convert.ToInt64(Math.Floor(100 * Math.Sqrt(ply.moneyPerClick)));
+			ply.currentMoney -= 55 * (ply.moneyPerClick * ply.moneyPerClick);
 			ply.moneyPerClick++;
 			Log.Info(ply.moneyPerClick);
 		}
