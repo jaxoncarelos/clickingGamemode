@@ -15,6 +15,7 @@ namespace Sandbox;
 /// </summary>
 public partial class MyGame : Sandbox.Game
 {
+	public static WebSocketClient WebSocketClient;
 	public MyGame()
 	{
 		if(IsServer)
@@ -47,30 +48,61 @@ public partial class MyGame : Sandbox.Game
 			tx.Position = tx.Position + Vector3.Up * 50.0f; // raise it up
 			pawn.Transform = tx;
 		}
+
+		StartWebSocketRpc( To.Single( client ), client );
+
+		
+		pawn.Respawn();
+	}
+	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+	{
+
+		base.ClientDisconnect( cl, reason );
+
+	}
+
+	[ClientRpc]
+	private async void StartWebSocketRpc(Client client)
+	{
+		WebSocketClient = new WebSocketClient();
+		bool isConnected = await WebSocketClient.Connect();
+		if ( isConnected ) Log.Info( "Connection to WS Server Successful" );
+		var pawn = client.Pawn as Pawn;
+		
+		WebSocketClient.SendMessage($"request {client.PlayerId}");
+
+		if(pawn.currentMoney == 0)
+		{	
+			WebSocketClient.SendMessage($"create {client.PlayerId} 0 1");
+			return;
+		}
+
+
+	}
+	
+	[ConCmd.Server("setValues")]
+	public static void setValues(string message)
+	{
+		Log.Info(message);
+		var values = message.Split(" ");
+
+		var ply = ConsoleSystem.Caller.Pawn as Pawn;
+
+		ply.currentMoney = Convert.ToInt64(values[1]);
+		ply.moneyPerClick = Convert.ToInt32(values[2]);
 	}
 	[ConCmd.Server("upgradeMoneyPerClick")]
 	public static void upgrade()
 	{
-		Log.Info("ran");
 		var ply = ConsoleSystem.Caller.Pawn as Pawn;
 		if(ply == null) return;
-		if(ply.currentMoney >= Math.Floor(100 * Math.Sqrt(ply.moneyPerClick)))
+		
+		if(ply.currentMoney >= 55 * (ply.moneyPerClick * ply.moneyPerClick))
 		{
-			Log.Info("Inside");
 			ply.currentMoney -= 55 * (ply.moneyPerClick * ply.moneyPerClick);
 			ply.moneyPerClick++;
-			Log.Info(ply.moneyPerClick);
 		}
-	}
-	[ConCmd.Server("setMoney")]
-	public static void setMoney(string amount)
-	{
-		var ply = ConsoleSystem.Caller.Pawn as Pawn;
-		ply.currentMoney = Convert.ToInt64(amount);
-	}
-	[ConCmd.Server]
-	public static void printLocation()
-	{
-		Log.Info(ConsoleSystem.Caller.Pawn.Position);
+		WebSocketClient.SendMessage($"update {ConsoleSystem.Caller.PlayerId} {ply.currentMoney} {ply.moneyPerClick}");
+
 	}
 }

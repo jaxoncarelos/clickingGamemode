@@ -19,7 +19,7 @@ partial class Pawn : Player
 	{
 		base.Spawn();
 
-        SetModel( "models/citizen/citizen.vmdl" );
+        SetModel( "models/citizen/citizen.vmdl_c" );
 
         Controller = new WalkController();
 		if ( DevController is NoclipController )
@@ -33,7 +33,7 @@ partial class Pawn : Player
 		EnableShadowInFirstPerson = true;
 		CameraMode = new FirstPersonCamera();
 	}
-
+	
 
 	/// <summary>
 	/// Called every tick, clientside and serverside.
