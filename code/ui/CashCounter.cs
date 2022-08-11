@@ -3,10 +3,10 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 
-public class CashCounter : Panel
+public class cashCounter : Panel
 {
     public Label cashCounter;
-    public CashCounter()
+    public cashCounter()
     {
         cashCounter = Add.Label("$0", "cash");
         StyleSheet.Load( "/ui/cashCounter.scss" );

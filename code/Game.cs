@@ -19,7 +19,7 @@ public partial class MyGame : Sandbox.Game
 	{
 		if(IsServer)
 		{
-			_ = new ClickingHud();
+			_ = new clickingHud();
 		}
 	}
 	/// <summary>

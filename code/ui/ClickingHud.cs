@@ -1,14 +1,14 @@
 using Sandbox;
 using Sandbox.UI;
 
-public partial class ClickingHud : HudEntity<RootPanel>
+public partial class clickingHud : HudEntity<RootPanel>
 {
-	public ClickingHud()
+	public clickingHud()
 	{
         if(!IsClient) return;
          
         RootPanel.AddChild<ChatBox>();
-        RootPanel.AddChild<CashCounter>();
+        RootPanel.AddChild<cashCounter>();
         RootPanel.AddChild<shopMenu>();
     }
 }
