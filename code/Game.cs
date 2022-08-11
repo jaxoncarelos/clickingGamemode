@@ -48,6 +48,26 @@ public partial class MyGame : Sandbox.Game
 			pawn.Transform = tx;
 		}
 	}
+	[ConCmd.Server("upgradeMoneyPerClick")]
+	public static void upgrade()
+	{
+		Log.Info("ran");
+		var ply = ConsoleSystem.Caller.Pawn as Pawn;
+		if(ply == null) return;
+		if(ply.currentMoney >= Math.Floor(100 * Math.Sqrt(ply.moneyPerClick)))
+		{
+			Log.Info("Inside");
+			ply.currentMoney -= Convert.ToInt64(Math.Floor(100 * Math.Sqrt(ply.moneyPerClick)));
+			ply.moneyPerClick++;
+			Log.Info(ply.moneyPerClick);
+		}
+	}
+	[ConCmd.Server("setMoney")]
+	public static void setMoney(string amount)
+	{
+		var ply = ConsoleSystem.Caller.Pawn as Pawn;
+		ply.currentMoney = Convert.ToInt64(amount);
+	}
 	[ConCmd.Server]
 	public static void printLocation()
 	{

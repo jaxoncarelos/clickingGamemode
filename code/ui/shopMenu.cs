@@ -1,5 +1,6 @@
 using Sandbox;
 using Sandbox.UI;
+using System;
 using Sandbox.UI.Construct;
 public class shopMenu : Panel
 {
@@ -11,9 +12,14 @@ public class shopMenu : Panel
     {
         StyleSheet.Load("/ui/shopMenu.scss");
         panel = Add.Panel("shopMenuOP");
-        upgradeMoney = panel.Add.Button("Upgrade Money Per Click", "upgrade");
-        costUpgrade = panel.Add.Label("$0", "cost");
-        currentAmount = panel.Add.Label("$1", "current");
+        upgradeMoney = panel.Add.Button("Upgrade", "upgrade");
+        upgradeMoney.AddEventListener( "onclick", () => {
+            ConsoleSystem.Run("upgradeMoneyPerClick");
+        });
+        costUpgrade = panel.Add.Label(null, "cost");
+        currentAmount = panel.Add.Label(null, "current");
+        costUpgrade.Style.FontColor = "white";
+        currentAmount.Style.FontColor = "white";
     }
 	public override void Tick()
 	{
@@ -21,7 +27,8 @@ public class shopMenu : Panel
         var ply = Local.Pawn as Pawn;
         if(ply == null) return;
 
-        currentAmount.Text = $"$ssss{ply.moneyPerClick}";
+        costUpgrade.Text = $"Cost: ${Math.Floor(100 * Math.Sqrt(ply.moneyPerClick))}";
+        currentAmount.Text = $"Current: ${ply.moneyPerClick}";
         Parent.SetClass("shopMenuOpen", Input.Down(InputButton.Flashlight));
 	}
 }
