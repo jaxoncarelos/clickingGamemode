@@ -48,7 +48,6 @@ partial class Pawn : Player
 		if ( IsServer && Input.Pressed( InputButton.PrimaryAttack ) )
 		{
 			currentMoney += moneyPerClick;
-			Log.Info(currentMoney);
 		}
 	}
 
