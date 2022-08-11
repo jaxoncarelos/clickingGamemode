@@ -5,10 +5,10 @@ using Sandbox.UI.Construct;
 
 public class cashCounter : Panel
 {
-    public Label cashCounter;
+    public Label cashCounterLbl;
     public cashCounter()
     {
-        cashCounter = Add.Label("$0", "cash");
+        cashCounterLbl = Add.Label("$0", "cash");
         StyleSheet.Load( "/ui/cashCounter.scss" );
     }
 
@@ -17,6 +17,6 @@ public class cashCounter : Panel
 		base.Tick();
         var ply = Local.Pawn as Pawn;
         if(ply == null) return;
-        cashCounter.Text = $"${ply.currentMoney}";
+        cashCounterLbl.Text = $"${ply.currentMoney}";
 	}
 }
