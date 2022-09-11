@@ -10,7 +10,7 @@ namespace Sandbox
 	public class WebSocketClient
 	{
 		private WebSocket _webSocket;
-		private readonly string _connectString = "ws://147.182.251.31:5001/";
+		private readonly string _connectString = "";
 		public WebSocketClient()
 		{
 			_webSocket = new WebSocket();
